@@ -1,0 +1,940 @@
+basePath: /api/v1
+definitions:
+  models.Brand:
+    enum:
+    - Toyota
+    - Honda
+    - Mercedes
+    - Wuling
+    - Mitsubishi
+    - Volkswagen
+    - Jeep
+    - Subaru
+    - Hyundai
+    - Kia
+    - Renault
+    - Volvo
+    - Chevrolet
+    - Ford
+    - BMW
+    type: string
+    x-enum-varnames:
+    - Toyota
+    - Honda
+    - Mercedes
+    - Wuling
+    - Mitsubishi
+    - Volkswagen
+    - Jeep
+    - Subaru
+    - Hyundai
+    - Kia
+    - Renault
+    - Volvo
+    - Chevrolet
+    - Ford
+    - BMW
+  models.CarCategory:
+    enum:
+    - City Car
+    - LCGC
+    - Compact
+    - MPV
+    - SUV
+    - Crossover
+    type: string
+    x-enum-varnames:
+    - CityCar
+    - LCGC
+    - Compact
+    - MPV
+    - SUV
+    - Crossover
+  models.TransmissionType:
+    enum:
+    - Automatic
+    - Manual
+    type: string
+    x-enum-varnames:
+    - Automatic
+    - Manual
+  requests.CreateCarRequest:
+    description: Request payload for creating a new car
+    properties:
+      brand:
+        allOf:
+        - $ref: '#/definitions/models.Brand'
+        description: |-
+          Brand of the car
+          @Description Brand of the car
+          @Example "Toyota"
+        enum:
+        - Toyota
+        - Honda
+        - Mercedes
+        - Wuling
+        - Mitsubishi
+        - Volkswagen
+        - Jeep
+        - Subaru
+        - Hyundai
+        - Kia
+        - Renault
+        - Volvo
+        - Chevrolet
+        - Ford
+        - BMW
+        example: Toyota
+      category:
+        allOf:
+        - $ref: '#/definitions/models.CarCategory'
+        description: |-
+          Category of the car
+          @Description Category of the car
+          @Example "SUV"
+        enum:
+        - CityCar
+        - LCGC
+        - Compact
+        - MPV
+        - SUV
+        - Crossover
+        example: SUV
+      description:
+        description: |-
+          Description of the car
+          @Description Description of the car
+          @Example "This is a sample car description"
+        example: This is a sample car description
+        maxLength: 500
+        minLength: 10
+        type: string
+      is_available:
+        description: |-
+          Availability status of the car
+          @Description Availability status of the car
+          @Example true
+        example: true
+        type: boolean
+      license_plate:
+        description: |-
+          License plate of the car
+          @Description License plate of the car
+          @Example "ABC123"
+        example: ABC123
+        maxLength: 10
+        minLength: 3
+        type: string
+      machine_number:
+        description: |-
+          Machine number of the car
+          @Description Machine number of the car
+          @Example "123456"
+        example: "123456"
+        maxLength: 10
+        minLength: 3
+        type: string
+      model:
+        description: |-
+          Model of the car
+          @Description Model of the car
+          @Example "Sample Model"
+        example: Sample Model
+        maxLength: 100
+        minLength: 3
+        type: string
+      name:
+        description: |-
+          Name of the car
+          @Description Name of the car
+          @Example "Sample Car"
+        example: Sample Car
+        maxLength: 100
+        minLength: 3
+        type: string
+      price_per_day:
+        description: |-
+          Price Per Day of the car
+          @Description Price Per Day of the car
+          @Example 10000
+        example: 10000
+        type: number
+      price_per_month:
+        description: |-
+          Price Per Month of the car
+          @Description Price Per Month of the car
+          @Example 40000
+        example: 40000
+        type: number
+      price_per_week:
+        description: |-
+          Price Per Week of the car
+          @Description Price Per Week of the car
+          @Example 7000
+        example: 7000
+        type: number
+      transmission:
+        allOf:
+        - $ref: '#/definitions/models.TransmissionType'
+        description: |-
+          Transmission type of the car
+          @Description Transmission type of the car
+          @Example "Automatic"
+        enum:
+        - Automatic
+        - Manual
+        example: Automatic
+      year:
+        description: |-
+          Year of the car
+          @Description Year of the car
+          @Example 2023
+        example: 2023
+        type: integer
+    required:
+    - brand
+    - category
+    - description
+    - is_available
+    - license_plate
+    - machine_number
+    - model
+    - name
+    - price_per_day
+    - price_per_month
+    - price_per_week
+    - transmission
+    - year
+    type: object
+  requests.CreateProductRequest:
+    description: Request payload for creating a new product
+    properties:
+      description:
+        description: |-
+          Description of the product
+          @Description Description of the product
+          @Example "This is a sample product description"
+        example: This is a sample product description
+        maxLength: 500
+        minLength: 10
+        type: string
+      name:
+        description: |-
+          Name of the product
+          @Description Name of the product
+          @Example "Sample Product"
+        example: Sample Product
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - description
+    - name
+    type: object
+  requests.UpdateCarRequest:
+    description: Request payload for updating a car
+    properties:
+      brand:
+        allOf:
+        - $ref: '#/definitions/models.Brand'
+        description: |-
+          Brand of the car
+          @Description Brand of the car
+          @Example "Toyota"
+        enum:
+        - Toyota
+        - Honda
+        - Mercedes
+        - Wuling
+        - Mitsubishi
+        - Volkswagen
+        - Jeep
+        - Subaru
+        - Hyundai
+        - Kia
+        - Renault
+        - Volvo
+        - Chevrolet
+        - Ford
+        - BMW
+        example: Toyota
+      category:
+        allOf:
+        - $ref: '#/definitions/models.CarCategory'
+        description: |-
+          Category of the car
+          @Description Category of the car
+          @Example "SUV"
+        enum:
+        - CityCar
+        - LCGC
+        - Compact
+        - MPV
+        - SUV
+        - Crossover
+        example: SUV
+      description:
+        description: |-
+          Description of the car
+          @Description Description of the car
+          @Example "This is an updated car description"
+        example: This is an updated car description
+        maxLength: 500
+        minLength: 10
+        type: string
+      is_available:
+        description: |-
+          Availability status of the car
+          @Description Availability status of the car
+          @Example true
+        example: true
+        type: boolean
+      license_plate:
+        description: |-
+          License plate of the car
+          @Description License plate of the car
+          @Example "ABC123"
+        example: ABC123
+        maxLength: 10
+        minLength: 3
+        type: string
+      machine_number:
+        description: |-
+          Machine number of the car
+          @Description Machine number of the car
+          @Example "123456"
+        example: "123456"
+        maxLength: 10
+        minLength: 3
+        type: string
+      model:
+        description: |-
+          Model of the car
+          @Description Model of the car
+          @Example "Sample Model"
+        example: Sample Model
+        maxLength: 100
+        minLength: 3
+        type: string
+      name:
+        description: |-
+          Name of the car
+          @Description Name of the car
+          @Example "Updated Car"
+        example: Updated Car
+        maxLength: 100
+        minLength: 3
+        type: string
+      price_per_day:
+        description: |-
+          Price Per Day of the car
+          @Description Price Per Day of the car
+          @Example 10000
+        example: 10000
+        type: number
+      price_per_month:
+        description: |-
+          Price Per Month of the car
+          @Description Price Per Month of the car
+          @Example 40000
+        example: 40000
+        type: number
+      price_per_week:
+        description: |-
+          Price Per Week of the car
+          @Description Price Per Week of the car
+          @Example 7000
+        example: 7000
+        type: number
+      transmission:
+        allOf:
+        - $ref: '#/definitions/models.TransmissionType'
+        description: |-
+          Transmission type of the car
+          @Description Transmission type of the car
+          @Example "Automatic"
+        enum:
+        - Automatic
+        - Manual
+        example: Automatic
+      year:
+        description: |-
+          Year of the car
+          @Description Year of the car
+          @Example 2023
+        example: 2023
+        type: integer
+    type: object
+  requests.UpdateProductRequest:
+    description: Request payload for updating a product
+    properties:
+      description:
+        description: |-
+          Description of the product
+          @Description Description of the product
+          @Example "This is an updated product description"
+        example: This is an updated product description
+        maxLength: 500
+        minLength: 10
+        type: string
+      name:
+        description: |-
+          Name of the product
+          @Description Name of the product
+          @Example "Updated Product"
+        example: Updated Product
+        maxLength: 100
+        minLength: 3
+        type: string
+    type: object
+  responses.CarResponse:
+    description: Car response structure
+    properties:
+      brand:
+        allOf:
+        - $ref: '#/definitions/models.Brand'
+        description: |-
+          Brand of the car
+          @Description Brand of the car
+          @Example "Toyota"
+        example: Toyota
+      category:
+        allOf:
+        - $ref: '#/definitions/models.CarCategory'
+        description: |-
+          Category of the car
+          @Description Category of the car
+          @Example "CityCar"
+        example: CityCar
+      created_at:
+        description: |-
+          Creation timestamp
+          @Description Creation timestamp
+          @Example "2023-01-01T00:00:00Z"
+        example: "2023-01-01T00:00:00Z"
+        type: string
+      description:
+        description: |-
+          Description of the car
+          @Description Description of the car
+          @Example "Comfortable family car with spacious interior"
+        example: Comfortable family car with spacious interior
+        type: string
+      id:
+        description: |-
+          Primary key
+          @Description Unique identifier
+          @Example 1
+        example: 1
+        type: integer
+      is_available:
+        description: |-
+          Availability status
+          @Description Whether the car is available for rent
+          @Example true
+        example: true
+        type: boolean
+      license_plate:
+        description: |-
+          License plate
+          @Description License plate number
+          @Example "B 1234 ABC"
+        example: B 1234 ABC
+        type: string
+      machine_number:
+        description: |-
+          Machine number
+          @Description Machine/engine number
+          @Example "ABC123456789"
+        example: ABC123456789
+        type: string
+      model:
+        description: |-
+          Model of the car
+          @Description Model of the car
+          @Example "Avanza"
+        example: Avanza
+        type: string
+      name:
+        description: |-
+          Name of the car
+          @Description Name of the car
+          @Example "Toyota Avanza"
+        example: Toyota Avanza
+        type: string
+      price_per_day:
+        description: |-
+          Price per day
+          @Description Price per day in IDR
+          @Example 300000
+        example: 300000
+        type: number
+      price_per_month:
+        description: |-
+          Price per month
+          @Description Price per month in IDR
+          @Example 7000000
+        example: 7000000
+        type: number
+      price_per_week:
+        description: |-
+          Price per week
+          @Description Price per week in IDR
+          @Example 1800000
+        example: 1800000
+        type: number
+      transmission:
+        allOf:
+        - $ref: '#/definitions/models.TransmissionType'
+        description: |-
+          Transmission type
+          @Description Transmission type
+          @Example "Automatic"
+        example: Automatic
+      updated_at:
+        description: |-
+          Last update timestamp
+          @Description Last update timestamp
+          @Example "2023-01-01T00:00:00Z"
+        example: "2023-01-01T00:00:00Z"
+        type: string
+      year:
+        description: |-
+          Year of the car
+          @Description Year of the car
+          @Example 2022
+        example: 2022
+        type: integer
+    type: object
+  responses.CarsListResponse:
+    description: Paginated list response for cars
+    properties:
+      data:
+        description: |-
+          List of cars
+          @Description Array of car data
+        items:
+          $ref: '#/definitions/responses.CarResponse'
+        type: array
+      pagination:
+        allOf:
+        - $ref: '#/definitions/utils.PaginationMeta'
+        description: |-
+          Pagination metadata
+          @Description Pagination information
+    type: object
+  utils.ErrorResponse:
+    description: Error response format
+    properties:
+      error:
+        example: Detailed error information
+        type: string
+      message:
+        example: Error message
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
+  utils.PaginationMeta:
+    description: Pagination metadata structure
+    properties:
+      has_next:
+        description: |-
+          Has next page
+          @Description Whether there is a next page
+          @Example true
+        example: true
+        type: boolean
+      has_prev:
+        description: |-
+          Has previous page
+          @Description Whether there is a previous page
+          @Example false
+        example: false
+        type: boolean
+      limit:
+        description: |-
+          Items per page
+          @Description Number of items per page
+          @Example 10
+        example: 10
+        type: integer
+      page:
+        description: |-
+          Current page number
+          @Description Current page number
+          @Example 1
+        example: 1
+        type: integer
+      total:
+        description: |-
+          Total number of items
+          @Description Total number of items
+          @Example 100
+        example: 100
+        type: integer
+      total_pages:
+        description: |-
+          Total number of pages
+          @Description Total number of pages
+          @Example 10
+        example: 10
+        type: integer
+    type: object
+  utils.SuccessResponse:
+    description: Success response format
+    properties:
+      message:
+        example: Operation completed successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: A RESTful API management system
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: RESTful API GO
+  version: "1.0"
+paths:
+  /cars:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of cars with optional pagination and filtering
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Items per page
+        in: query
+        name: limit
+        type: integer
+      - description: Filter by availability
+        in: query
+        name: available
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.CarsListResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Get all cars
+      tags:
+      - cars
+    post:
+      consumes:
+      - application/json
+      description: Create a new car with the provided information
+      parameters:
+      - description: Car creation request
+        in: body
+        name: car
+        required: true
+        schema:
+          $ref: '#/definitions/requests.CreateCarRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Create a new car
+      tags:
+      - cars
+  /cars/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a car by its ID
+      parameters:
+      - description: Car ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Delete a car
+      tags:
+      - cars
+    get:
+      consumes:
+      - application/json
+      description: Get a single car by its ID
+      parameters:
+      - description: Car ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.CarResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Get a car by ID
+      tags:
+      - cars
+    put:
+      consumes:
+      - application/json
+      description: Update an existing car with the provided information
+      parameters:
+      - description: Car ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Car update request
+        in: body
+        name: car
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UpdateCarRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Update a car
+      tags:
+      - cars
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of products with optional pagination and filtering
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Items per page
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.SuccessResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Get all products
+      tags:
+      - products
+    post:
+      consumes:
+      - application/json
+      description: Create a new product with the provided information
+      parameters:
+      - description: Product creation request
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/requests.CreateProductRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/utils.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Create a new product
+      tags:
+      - products
+  /products/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a product by its ID
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Delete a product
+      tags:
+      - products
+    get:
+      consumes:
+      - application/json
+      description: Get a single product by its ID
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Get a product by ID
+      tags:
+      - products
+    put:
+      consumes:
+      - application/json
+      description: Update an existing product with the provided information
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Product update request
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UpdateProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Update a product
+      tags:
+      - products
+schemes:
+- http
+- https
+swagger: "2.0"
