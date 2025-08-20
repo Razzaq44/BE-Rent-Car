@@ -87,8 +87,13 @@ func InitDatabase() error {
 // runMigrations runs database migrations for all models
 func runMigrations() error {
 	return DB.AutoMigrate(
-		&models.Product{},
+		&models.User{},
+		&models.Role{},
+		&models.Permission{},
+		&models.RefreshToken{},
+		&models.TokenBlacklist{},
 		&models.Car{},
+		&models.Product{},
 	)
 }
 
