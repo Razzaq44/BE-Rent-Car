@@ -7,6 +7,7 @@ import (
 	"sync"
 	"time"
 
+	"api-rentcar/services"
 	"api-rentcar/utils"
 
 	"github.com/gin-gonic/gin"
@@ -207,10 +208,8 @@ func RequirePermission(permission string) gin.HandlerFunc {
 }
 
 // InitializeMiddleware initializes global middleware instances
-func InitializeMiddleware(authService interface{}, jwtService interface{}, rbacService interface{}) {
-	// This function should be called from main.go after services are initialized
-	// For now, we'll create a placeholder that doesn't panic
-	// TODO: Implement proper initialization when services are available
+func InitializeMiddleware(authService *services.AuthService, jwtService *services.JWTService, rbacService *services.RBACService) {
+	globalAuthMiddleware = NewAuthMiddleware(authService, jwtService, rbacService)
 }
 
 // IPWhitelist middleware allows only whitelisted IPs

@@ -1,8 +1,10 @@
 package routes
 
 import (
+	"api-rentcar/config"
 	"api-rentcar/controllers"
 	"api-rentcar/middleware"
+	"api-rentcar/repositories"
 	"api-rentcar/repositories/car"
 	"api-rentcar/repositories/product"
 	"api-rentcar/services"
@@ -16,17 +18,30 @@ import (
 
 // SetupRoutes configures all application routes
 func SetupRoutes(router *gin.Engine, db *gorm.DB) {
-	// Initialize repository
+	// Initialize repositories
 	productRepo := product.NewProductRepository(db)
 	carRepo := car.NewCarRepository(db)
+	userRepo := repositories.NewUserRepository(db)
+	roleRepo := repositories.NewRoleRepository(db)
+	permissionRepo := repositories.NewPermissionRepository(db)
+	tokenRepo := repositories.NewTokenRepository(db)
+	blacklistRepo := repositories.NewTokenBlacklistRepository(db)
 
-	// Initialize service
+	// Initialize services
 	productService := services.NewProductService(productRepo)
 	carService := services.NewCarService(carRepo)
+	jwtService := services.NewJWTService(userRepo, tokenRepo, blacklistRepo)
+	rbacService := services.NewRBACService(db, *roleRepo, *permissionRepo, *userRepo)
+	authService := services.NewAuthService(jwtService, rbacService, config.AppConfig, *userRepo, *tokenRepo)
+
+	// Initialize middleware
+	middleware.InitializeMiddleware(authService, jwtService, rbacService)
 
 	// Initialize controllers
 	productController := controllers.NewProductController(productService)
 	carController := controllers.NewCarController(carService)
+	authController := controllers.NewAuthController(authService, jwtService, rbacService)
+	rbacController := controllers.NewRBACController(rbacService)
 
 	// Health check endpoint
 	router.GET("/health", func(c *gin.Context) {
@@ -39,6 +54,10 @@ func SetupRoutes(router *gin.Engine, db *gorm.DB) {
 
 	// Swagger documentation
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	// Setup auth and RBAC routes
+	SetupAuthRoutes(router, authController)
+	SetupRBACRoutes(router, rbacController)
 
 	// API v1 routes
 	v1 := router.Group("/api/v1")
